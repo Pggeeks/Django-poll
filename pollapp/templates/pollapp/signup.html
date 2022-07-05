@@ -1,0 +1,30 @@
+<html>
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static '/css/signup.css' %}">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+</head>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <form method="post" action="">
+            {% csrf_token %}
+            {% for field in form %}
+            {{field}}
+            <div>
+                {{field.errors}}
+            </div>
+            {% endfor %}
+            <input type="submit" value="Register">
+        </form>
+    </div>
+</div>
+</body>
+
+</html>

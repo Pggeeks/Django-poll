@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    {% include 'pollapp/navbar.html '%}
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href={% static "/css/style.css" %}>
+    </head>
+
+    <body class="bg-grey">
+        <section class="poll">
+            {% for Obj in polls %}
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <p style="text-align: right;"> Asked by:- {{Obj.poll.user}}</p>
+                    <p class="h5">Q.{{forloop.counter}}{{Obj.poll}}?</p>
+                    <div style="margin-left: 20px;">
+                        <input type="text" value="{{Obj.poll.id}}" name="poll_id" hidden>
+                        <input type="radio" value="option1" class="radio" name="Answer">
+                        <label for="html" class="opt">{{Obj.option1}}</label><br>
+                        <!--  -->
+                        <input type="radio" value="option2" name="Answer">
+                        <label for="html" class="opt">{{Obj.option2}}</label><br>
+                        <!--  -->
+                        <input type="radio" value="option3" name="Answer">
+                        <label for="html" class="opt">{{Obj.option3}}</label><br>
+                        <!--  -->
+                        <input type="radio" value="option4" name="Answer">
+                        <label for="html" class="opt">{{Obj.option4}}</label><br>
+                    </div>
+                </div>
+                <button id="open-popup-1" type="submit" class="btn btn-primary" style="margin-top:20px;">Submit</button>
+                <hr style="margin: 10px 0px 0px 0px;">
+            </form>
+            {% endfor %}
+        </section>
+        {% if Result %}
+        <div class="centerdiv" id="hide">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted" style="text-align: right;">Total votes:-
+                        {{Result.Total_Votes}}</h6>
+                    <h5 class="card-title">Q. {{Result.poll.question}}?</h5>
+                    <div class="list-group">
+                        <p class="list-group-item list-group-item-action mb-2">{{Result.option1}} -
+                            {{Result.option_1_count}}</p>
+                        <p class="list-group-item list-group-item-action mb-2">{{Result.option2}} -
+                            {{Result.option_2_count}}</p>
+                        <p class="list-group-item list-group-item-action mb-2">{{Result.option3}} -
+                            {{Result.option_3_count}}</p>
+                        <p class="list-group-item list-group-item-action mb-2">{{Result.option4}} -
+                            {{Result.option_4_count}}</p>
+                    </div>
+                    <button id="Close" onclick="document.getElementById('hide').style.display='none';">close</button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        <script>
+            $('.radio').change(function () {
+                $('.radio').not(this).prop('checked', false);
+            });
+
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>

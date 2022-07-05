@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href={% static "/css/style.css" %}>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body class="bg-grey">
+    {% include 'pollapp/navbar.html' %}
+    <section class="poll">
+        <div style="display:flex; align-items: center; justify-content: center;">
+            <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="280"
+                height="280" alt="logo">
+        </div>
+        <div style="text-align:center; font-size: 20px;">
+            <div class="mb-3">
+                <label for="">Username:</label>
+                <input type="text" name="something" placeholder=" {{User_Object.username}}" disabled />
+            </div>
+            <div class="mb-3">
+                <label for="">E-mail:</label>
+                <input type="text" name="something" placeholder=" {{User_Object.email}}" disabled />
+            </div>
+            <div class="mb-3">
+                <label for="">First Name:</label>
+                <input type="text" name="something" placeholder=" {{User_Object.first_name}}" disabled />
+            </div>
+            <div class="mb-3">
+                <label for="">Last Name:</label>
+                <input type="text" name="something" placeholder=" {{User_Object.last_name}}" disabled />
+            </div>
+            <div class="mb-3">
+                <label for="">Date Joined:</label>
+                <input type="text" name="something" placeholder=" {{User_Object.date_joined}}" disabled />
+            </div>
+        </div>
+        <hr>
+        <div class="blockquote" style="font-size: 28px; margin:20px;">
+            My Polls
+        </div>
+        {% for i in mypolls%}
+        <h5 class="card-title">Q. {{i.poll.question}}?</h5>
+        <div class="list-group">
+            <p class="list-group-item list-group-item-action mb-2">{{i.option1}} - {{i.option_1_count}}</p>
+            <p class="list-group-item list-group-item-action mb-2">{{i.option2}} - {{i.option_2_count}}</p>
+            <p class="list-group-item list-group-item-action mb-2">{{i.option3}} - {{i.option_3_count}}</p>
+            <p class="list-group-item list-group-item-action mb-2">{{i.option4}} - {{i.option_4_count}}</p>
+        </div>
+        {% endfor %}
+    </section>
+</body>
+
+</html>
